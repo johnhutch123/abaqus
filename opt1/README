@@ -1,0 +1,1 @@
+Basic truss optimisation. This is not an efficient way to run an optimisation due to the overheads of calling the external FEA solver. Problem is simple enough for stresses and strains to be calcaulted analytically. 
