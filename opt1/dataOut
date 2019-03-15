@@ -1,0 +1,41 @@
+# -*- coding: mbcs -*-
+# Do not delete the following import lines
+from abaqus import *
+from abaqusConstants import *
+import __main__
+
+def Macro1():
+    import section
+    import regionToolset
+    import displayGroupMdbToolset as dgm
+    import part
+    import material
+    import assembly
+    import step
+    import interaction
+    import load
+    import mesh
+    import optimization
+    import job
+    import sketch
+    import visualization
+    import xyPlot
+    import displayGroupOdbToolset as dgo
+    import connectorBehavior
+    a = mdb.models['Model-1'].rootAssembly
+    session.viewports['Viewport: 1'].setValues(displayedObject=a)
+    session.viewports['Viewport: 1'].assemblyDisplay.setValues(
+        optimizationTasks=OFF, geometricRestrictions=OFF, stopConditions=OFF)
+    session.mdbData.summary()
+    o3 = session.openOdb(
+        name='C:/Users/pqb18127/OneDrive/PhD/Training/NAFEMS Homework 1/Job-1.odb')
+    session.viewports['Viewport: 1'].setValues(displayedObject=o3)
+    odb = session.odbs['C:/Users/pqb18127/OneDrive/PhD/Training/NAFEMS Homework 1/Job-1.odb']
+    session.fieldReportOptions.setValues(reportFormat=COMMA_SEPARATED_VALUES)
+    session.writeFieldReport(fileName='C:/Users/pqb18127/OneDrive/PhD/Training/NAFEMS Homework 1/data.csv', append=OFF, 
+        sortItem='Node Label', odb=odb, step=1, frame=1, outputPosition=NODAL, 
+        variable=(('U', NODAL, ((INVARIANT, 'Magnitude'), )), ('S', 
+        INTEGRATION_POINT, ((INVARIANT, 'Mises'), )), ))
+
+
+Macro1()
