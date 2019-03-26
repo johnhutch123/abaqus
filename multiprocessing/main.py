@@ -18,8 +18,9 @@ import time
 njobs = 12
 
 #Abaqus Caller
-def analysis (filename):
+def analysis (filename,i):
     os.system('abaqus job=' + filename + ' interactive ask_delete=OFF')
+    os.system('abaqus viewer noGui=getDisps.py -- ' + str(i) ) # runs macro and passes i value to it 
 
 
 def main():
@@ -35,11 +36,11 @@ def main():
     #Set filename structure here    
     basename = "mp"
 
-    #Generate List of Runfiles    
-    runnames = [basename + str(i) for i in range (1,njobs+1) ] 
+    #Generate List of tuples containing inputs to the analysis function.    
+    args = [(basename + str(i),i) for i in range (1,njobs+1) ] 
     
     #Parallise  
-    Pool().map(analysis, runnames, chunksize = 1)
+    Pool().starmap(analysis, args, chunksize = 1)
 
     
 if __name__ == "__main__":
