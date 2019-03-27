@@ -2,7 +2,7 @@
 """
 Created on Tue Mar 26 15:05:35 2019
 
-Copies a folder in the same working directory as this script.
+Contains code required for one function evaluation of abaqus FEA model.
 
 @author: John Hutcheson
 """
@@ -19,7 +19,7 @@ copyDir = r'C:\Users\pqb18127\OneDrive\PhD\Python\DEAP\multiprocessing\MP Workfl
 pasteDir = r'C:\Users\pqb18127\OneDrive\PhD\Python\DEAP\multiprocessing\MP Workflow Abaqus\analysis_'
 
 noCores = 8
-njobs = 8
+njobs = 16
 
 def analysis(i):
     jobDir = shutil.copytree(copyDir,pasteDir + str(i)) # copy the original folder for use in this analysis.
@@ -50,4 +50,4 @@ if __name__ == "__main__":
     t1 = time.time()
     main()
     t2 = time.time()
-    print('Time to solve: ' + str(t2-t1) + ' s.') 
+    print('Time to solve: ' + str(t2-t1) + ' s.')
